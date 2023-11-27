@@ -1,0 +1,80 @@
+<div id="container_p">
+  <div class="container">
+    <% if flash[:notice] %>
+      <div class="notice"><%= flash[:notice] %></div>
+    <% end %>
+
+    <%= javascript_pack_tag 'bmr', 'data-turbolinks-track': 'reload' %>
+
+
+    <h1 style="text-align: center; padding-top: 40px;">Calories Index Page</h1>
+    <div class="d-flex justify-content-center">
+      <table>
+        <thead>
+          <tr>
+            <th style="text-align: center">Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @calories.each do |calorie| %>
+            <tr>
+              <td><%= calorie.name %></td>
+              <td><%= link_to "Show", calory_path(calorie), class: "btn btn-outline-success mx-2" %></td>
+              <td><%= link_to "Edit", edit_calory_path(calorie), class: "btn btn-outline-success mx-2" %></td>
+              <td><%= link_to "Destroy", calory_path(calorie), method: :delete, class: "btn btn-outline-danger mx-2", data: {confirm: "Are you sure?" } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <br>
+    <div class="d-flex justify-content-center"><%= link_to 'New Calory', new_calory_path, class:"btn btn-outline-success" %></div>
+    </br>
+    <div class="d-flex justify-content-center">
+     <div class="bmr-calculator">
+        <h2>BMR Calculator</h2>
+        <div class="controls">
+          <form>
+            <h3>Age (10 - 100)</h3>
+            <input type="text" id="age" />
+
+            <div class="gender">
+              <h3>Gender</h3>
+              <input type="radio" id="male" value="male" name="gender" checked />
+              <label for="male">Male</label>
+              <input type="radio" id="female" value="female" name="gender" />
+              <label for="female">Female</label>
+            </div>
+
+            <div class="height">
+              <h3>Height</h3>
+              <input type="text" id="height" placeholder="Height in cm" />
+            </div>
+
+            <div class="weight">
+              <h3>Weight</h3>
+              <input type="text" id="weight" placeholder="Weight in kg" />
+            </div>
+          </form>
+        </div>
+        </br>
+
+        <div class="result">
+          <button class="calculate-btn">Calculate</button>
+
+          <div class="result-message">
+            <span class="calories">0</span> Kcal/day
+          </div>
+
+          <div class="error-message">
+            <p>Please enter all the details correctly.</p>
+          </div>
+        </div>
+      </div>  
+     </div>
+     </br>
+     <div class="interpretation-message">
+        <p></p>
+      </div>
+  </div>  
+</div>    

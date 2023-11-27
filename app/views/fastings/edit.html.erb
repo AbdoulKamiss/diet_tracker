@@ -1,0 +1,37 @@
+<div id="container_p">
+<h1>Edit Fasting Page</h1>
+
+<%= form_with(model: @fasting, url: fasting_path(@fasting), local: true) do |form| %>
+  <% if @fasting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@fasting.errors.count, "error") %> prohibited this fasting from being saved:</h2>
+
+      <ul>
+      <% @fasting.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :start_time %>
+    <%= form.datetime_field :start_time, id: :task_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_time %>
+    <%= form.datetime_field :end_time, id: :task_content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description, id: :task_cotent %>
+  </div>
+  
+    <div class="actions">
+      <%= form.submit "Update Fasting", id: "update-task" %>
+    </div>
+  <% end %>
+<%= link_to 'Back', fastings_path, id: "back" %>
+</div>

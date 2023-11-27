@@ -1,0 +1,37 @@
+<div id="container_p">
+<h1>Edit Workout Page</h1>
+
+<%= form_with(model: @workout, url: workout_path(@workout), local: true) do |form| %>
+  <% if @workout.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@workout.errors.count, "error") %> prohibited this workout from being saved:</h2>
+
+      <ul>
+      <% @workout.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :task_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :duration %>
+    <%= form.number_field :duration, id: :task_content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.date_field :date, id: :task_cotent %>
+  </div>
+  
+    <div class="actions">
+      <%= form.submit "Update Workout", id: "update-task" %>
+    </div>
+  <% end %>
+<%= link_to 'Back', workouts_path, id: "back" %>
+</div>

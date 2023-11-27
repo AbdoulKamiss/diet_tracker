@@ -1,0 +1,36 @@
+<div id="container_p">
+  <div class="container">
+    <% if flash[:notice] %>
+      <div class="notice"><%= flash[:notice] %></div>
+    <% end %>
+
+    <h1 style="text-align: center; padding-top: 40px;">Fastings Index Page</h1>
+    <div class="row d-flex justify-content-center">
+      <table class="table col-10">
+        <thead class="table-success">
+          <tr>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Description</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @fastings.each do |fasting| %>
+            <tr>
+              <td><%= fasting.start_time %></td>
+              <td><%= fasting.end_time %></td>
+              <td><%= fasting.description %></td>
+              <td><%= link_to "", fasting_path(fasting), class: "bi bi-box-arrow-in-right" %></td>
+              <td><%= link_to "", edit_fasting_path(fasting), class:"bi bi-pen" %></td>
+              <!--<td><%= link_to "Destroy", fasting_path(fasting), method: :delete, class: "destroy-task", data: {confirm: "Are you sure?" } %></td>-->
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <br>
+    <div class="d-flex justify-content-center"><%= link_to 'New Fasting', new_fasting_path, class:"btn btn-outline-success" %></div>
+  </div>
+</div>

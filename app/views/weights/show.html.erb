@@ -1,0 +1,48 @@
+<div id="container_p">
+  <% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
+
+  <div class="container">
+    <h1 style="text-align: center; padding-top: 40px;">Show Weight Page</h1>
+    <h2 style="text-align: center"><%= @weight.name %></h1>
+    <div class="d-flex justify-content-center">
+      <table class="table table-bordered">
+        <thead class="table-success"> 
+          <tr>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+            <th>Sunday</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @weight.monday %> Kg</td>
+            <td><%= @weight.tuesday %> Kg</td>
+            <td><%= @weight.wednesday %> Kg</td>
+            <td><%= @weight.thursday %> Kg</td>
+            <td><%= @weight.friday %> Kg</td>
+            <td><%= @weight.saturday %> Kg</td>
+            <td><%= @weight.sunday %> Kg</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+      <p><strong>Average Weight:</strong> <%= number_with_precision(@weight.calculate_average, precision: 2) %> Kg</p>
+      <p><strong>Maximum Weight:</strong> <%= @weight.max_value %> Kg</p>
+      <p><strong>Minimum Weight:</strong> <%= @weight.min_value %> Kg</p>
+    
+
+    <%= link_to 'Edit', edit_weight_path(@weight), class:"btn btn-outline-success",id: "edit-weight" %>
+    <%= link_to 'Back', weights_path, class:"btn btn-outline-dark mx-2",id: "back" %>
+
+    <div class="d-flex justify-content-between mt-4">
+      <%= link_to 'Previous', weight_path(@weight.previous), class:"btn btn-outline-success",id: "edit-weight" %>
+      <%= link_to 'Next', weight_path(@weight.next), class:"btn btn-outline-success",id: "edit-weight" %>
+    </div>
+  </div>
+</div>

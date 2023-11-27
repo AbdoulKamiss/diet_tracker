@@ -1,0 +1,33 @@
+<div id="container_p">
+<% if flash[:notice] %>
+  <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+
+<h1>Show Fasting Page</h1>
+
+
+<p>Heure de début du jeûne : <span id="fasting_start"><%= @fasting.start_time %></span></p>
+<p>Heure de fin du jeûne : <span id="fasting_end"><%= @fasting.end_time %></span></p>
+
+<p>Description: <%= @fasting.description %></p>
+
+<p>Fasting Period: <%= @fasting.fast_period %></p>
+
+<div id="countdown">En attente du démarrage du compte à rebours...</div>
+<!--<div id="countdown-container">
+  <div id="countdown" class="countdown-text"></div>
+  <div id="progress-bar" class="progress-bar">
+    <div id="progress-fill" class="progress-fill"></div>
+  </div>
+</div>-->
+    <div class="containerr">
+      <div class="circular-progress">
+        <div class="value-container">0%</div>
+      </div>
+    </div>
+
+
+
+<%= link_to 'Edit', edit_fasting_path(@fasting), id: "edit-task" %> |
+<%= link_to 'Back', fastings_path, id: "back" %>
+</div>

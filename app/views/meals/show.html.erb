@@ -1,0 +1,74 @@
+<div id="container_p">
+  <% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
+  <div class="container">  
+    <h1 style="text-align: center; padding-top: 40px;">Show Meal Page</h1>
+
+    <h1 style="text-align: center"><%= @meal.name %></h1>
+
+    <% total_calories = 0 %>
+    <% total_protein = 0 %>
+    <% total_carbohydrates = 0 %>
+    <% total_fat = 0 %>
+    
+      <div class="d-flex justify-content-center">
+        <table class="table table-striped">
+          <thead class="table-success">
+            <tr>
+              <th>Food</th>
+              <th>Quantity</th>
+              <th>Calories</th>
+              <th>Protein</th>
+              <th>Carbohydrates</th>
+              <th>Fat</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @meal.meal_foods.each do |meal_food| %>
+            <tr>
+              <td><%= Food.find(meal_food.food_id).name %></td>
+              <td><%= meal_food.quantity %>g</td>
+              <td><%= meal_food.quantity_count(  meal_food.quantity, Food.find( meal_food.food_id).calories) %> Kcal</td>
+              <td><%= meal_food.quantity_count( meal_food.quantity, Food.find(meal_food.food_id).protein ) %>g</td>
+              <td><%= meal_food.quantity_count( meal_food.quantity, Food.find(meal_food.food_id).carbohydrates ) %>g</td>
+              <td><%= meal_food.quantity_count( meal_food.quantity, Food.find(meal_food.food_id).fat ) %>g</td>
+              <td><%= link_to '', edit_meal_meal_food_path(@meal, meal_food), class:"bi bi-pen", id: "edit-task" %></td>
+              <td><%= link_to '', meal_meal_food_path(@meal, meal_food), method: :delete, class:"bi bi-trash", data: {confirm: "Are you sure?" } %></td>
+            </tr>
+            <% total_calories += meal_food.quantity_count(meal_food.quantity, Food.find(meal_food.food_id).calories) %>
+            <% total_protein += meal_food.quantity_count(meal_food.quantity, Food.find(meal_food.food_id).protein) %>
+            <% total_carbohydrates += meal_food.quantity_count(meal_food.quantity, Food.find(meal_food.food_id).carbohydrates) %>
+            <% total_fat += meal_food.quantity_count(meal_food.quantity, Food.find(meal_food.food_id).fat) %>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    
+    <div class="d-flex justify-content-center"><%= link_to 'Add food +', new_meal_meal_food_path(@meal), class:"btn btn-outline-success mb-3", id: "edit-task" %></div> 
+    <div class="d-flex justify-content-center">
+      <table class="table">
+        <thead class="table-success">
+          <tr>
+            <th>Total Calories</th>
+            <th>Total Protein</th>
+            <th>Total Carbohydrates</th>
+            <th>Total Fat</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= total_calories %> Kcal</td>
+            <td><%= total_protein %>g</td>
+            <td><%= total_carbohydrates %>g</td>
+            <td><%= total_fat %>g</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="d-flex justify-content-center"><%= link_to 'Back', meals_path, class:"btn btn-outline-dark mb-3", id: "back" %></div>
+    
+  </div>  
+</div>

@@ -1,0 +1,32 @@
+<div id="container_p">
+<h1>Modifier l'aliment pour le repas</h1>
+
+<%= form_with(model: [@meal, @meal_food], local: true, method: :patch) do |form| %>
+  <% if @meal_food.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@meal_food.errors.count, "error") %> prohibited this meal_food from being being updated:</h2>
+      <ul>
+        <% @meal_food.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :food_id, "Sélectionnez un aliment" %>
+    <%= form.collection_select :food_id, Food.all, :id, :name, prompt: "Sélectionnez un aliment" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :quantity, "Quantité" %>
+    <%= form.text_field :quantity %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Update MealFood" %>
+  </div>
+<% end %>
+
+<%= link_to 'Retour', meal_path(@meal.id), id: "back" %>
+</div>

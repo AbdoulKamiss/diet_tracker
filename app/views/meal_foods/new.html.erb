@@ -1,0 +1,36 @@
+<div id="container_p">
+<h1>Nouvel aliment pour le repas</h1>
+
+<%= form_with(model: [@meal, @meal_food], local: true) do |form| %>
+  <% if @meal_food.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@meal_food.errors.count, "error") %> prohibited this meal_food from being saved:</h2>
+      <ul>
+        <% @meal_food.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :food_id, "Sélectionnez un aliment" %>
+    <%= form.collection_select :food_id, Food.all, :id, :name, prompt: "Sélectionnez un aliment" %>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :meal_id, value: @meal.id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :quantity, "Quantité" %>
+    <%= form.text_field :quantity %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Create MealFood" %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', meal_path(@meal.id), id: "back" %>
+</div>

@@ -1,0 +1,47 @@
+<div id="container_p">
+<h1>Edit Food Page</h1>
+
+<%= form_with(model: @food, url: food_path(@food), local: true) do |form| %>
+  <% if @food.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@food.errors.count, "error") %> prohibited this food from being saved:</h2>
+
+      <ul>
+      <% @food.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :task_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :calories %>
+    <%= form.text_field :calories, id: :task_content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :protein %>
+    <%= form.text_field :protein, id: :task_cotent %>
+  </div>
+
+  <div class="field">
+    <%= form.label :carbohydrates %>
+    <%= form.text_field :carbohydrates, id: :task_cotent %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fat %>
+    <%= form.text_field :fat, id: :task_cotent %>
+  </div>
+  
+    <div class="actions">
+      <%= form.submit "Update Food", id: "update-task" %>
+    </div>
+  <% end %>
+<%= link_to 'Back', foods_path, id: "back" %>
+</div>

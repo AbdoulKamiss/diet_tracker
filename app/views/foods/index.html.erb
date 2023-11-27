@@ -1,0 +1,35 @@
+<div id="container_p">
+<% if flash[:notice] %>
+  <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+
+<h1>Foods Index Page</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Calories</th>
+      <th>Protein</th>
+      <th>Carbohydrates</th>
+      <th>Fat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @foods.each do |food| %>
+      <tr>
+        <td><%= food.name %></td>
+        <td><%= food.calories %> Kcal</td>
+        <td><%= food.protein %> g</td>
+        <td><%= food.carbohydrates %> g</td>
+        <td><%= food.fat %> g</td>
+        <td><%= link_to "Show", food_path(food), class: "show-task" %></td>
+        <td><%= link_to "Edit", edit_food_path(food), class: "edit-task" %></td>
+        <td><%= link_to "Destroy", food_path(food), method: :delete, class: "destroy-task", data: {confirm: "Are you sure?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<%= link_to 'New Food', new_food_path %>
+</div>

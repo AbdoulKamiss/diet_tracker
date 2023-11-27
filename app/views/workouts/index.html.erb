@@ -1,0 +1,31 @@
+<div id="container_p">
+<% if flash[:notice] %>
+  <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+
+<h1>Workouts Index Page</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Duration</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @workouts.each do |workout| %>
+      <tr>
+        <td><%= workout.name %></td>
+        <td><%= workout.duration %> min</td>
+        <td><%= workout.date %></td>
+        <td><%= link_to "Show", workout_path(workout), class: "show-task" %></td>
+        <td><%= link_to "Edit", edit_workout_path(workout), class: "edit-task" %></td>
+        <td><%= link_to "Destroy", workout_path(workout), method: :delete, class: "destroy-task", data: {confirm: "Are you sure?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<%= link_to 'New Workout', new_workout_path %>
+</div>

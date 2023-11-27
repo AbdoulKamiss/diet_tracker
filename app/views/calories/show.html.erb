@@ -1,0 +1,48 @@
+<div id="container_p">
+<% if flash[:notice] %>
+  <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+
+<div class="container">
+  <h1 style="text-align: center; padding-top: 40px;">Show Calories Page</h1>
+    <h2 style="text-align: center"><%= @calorie.name %></h1>
+    <div class="d-flex justify-content-center">
+      <table class="table table-bordered">
+        <thead class="table-success"> 
+          <tr>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+            <th>Sunday</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @calorie.monday %> Kcal</td>
+            <td><%= @calorie.tuesday %> Kcal</td>
+            <td><%= @calorie.wednesday %> Kcal</td>
+            <td><%= @calorie.thursday %> Kcal</td>
+            <td><%= @calorie.friday %> Kcal</td>
+            <td><%= @calorie.saturday %> Kcal</td>
+            <td><%= @calorie.sunday %> Kcal</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+<p><strong>Average Calorie Intake:</strong> <%= number_with_precision(@calorie.calculate_average, precision: 2) %> Kcal</p>
+<p><strong>Maximum Calorie Intake:</strong> <%= @calorie.max_value %> Kcal</p>
+<p><strong>Minimum Calorie Intake:</strong> <%= @calorie.min_value %> Kcal</p>
+
+<%= link_to 'Edit', edit_calory_path(@calorie), class:"btn btn-outline-success", id: "edit-task" %> 
+<%= link_to 'Back', calories_path, class:"btn btn-outline-dark mx-2", id: "back" %>
+
+    <div class="d-flex justify-content-between mt-4">
+      <%= link_to 'Previous', calory_path(@calorie.previous), class:"btn btn-outline-success",id: "edit-weight" %>
+      <%= link_to 'Next', calory_path(@calorie.next), class:"btn btn-outline-success",id: "edit-weight" %>
+    </div>
+</div>
+</div>
